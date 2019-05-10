@@ -440,13 +440,10 @@ func (f *File) RemoveRow(sheet string, row int) error {
 //    err := f.InsertRow("Sheet1", 3)
 //
 func (f *File) InsertRow(sheet string, row int) error {
-	if row < 1 {
-		return newInvalidRowNumberError(row)
-	}
-	return f.adjustHelper(sheet, rows, row, 1)
+	return f.InsertRows(sheet, row, 1)
 }
 
-// InsertRow provides a function to insert multiple new rows after given Excel row
+// InsertRows provides a function to insert multiple new rows after given Excel row
 // number starting from 1. For example, create 4 new rows before row 3 in
 // Sheet1:
 //
