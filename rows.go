@@ -446,6 +446,19 @@ func (f *File) InsertRow(sheet string, row int) error {
 	return f.adjustHelper(sheet, rows, row, 1)
 }
 
+// InsertRow provides a function to insert multiple new rows after given Excel row
+// number starting from 1. For example, create 4 new rows before row 3 in
+// Sheet1:
+//
+//    err := f.InsertRows("Sheet1", 3, 4)
+//
+func (f *File) InsertRows(sheet string, row int, num int) error {
+	if row < 1 {
+		return newInvalidRowNumberError(row)
+	}
+	return f.adjustHelper(sheet, rows, row, num)
+}
+
 // DuplicateRow inserts a copy of specified row (by its Excel row number) below
 //
 //    err := f.DuplicateRow("Sheet1", 2)
